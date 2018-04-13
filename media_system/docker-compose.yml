@@ -1,0 +1,55 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: always
+    environment:
+      - TZ=America/New_York
+    network_mode: host
+    volumes:
+      - /media/sp0gg/BIGGUN/server_configs/plex:/config
+      - /tmp/plex_transcode:/transcode
+      - /media/sp0gg/BIGGUN/media/TV:/data/tv
+      - /media/sp0gg/BIGGUN/media/Movies:/data/movies
+      - /media/sp0gg/BIGGUN/media/Exercise:/data/exercise
+  qbittorrent:
+    container_name: qbittorrent
+    image: wernight/qbittorrent
+    restart: always
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "8080:8080"
+      - "6881:6881/tcp"
+      - "6881:6881/udp"
+    volumes:
+      - /media/sp0gg/BIGGUN/server_configs/qbittorrent:/config
+      - /media/sp0gg/BIGGUN/media/Downloads:/torrents
+      - /media/sp0gg/BIGGUN/media/Downloads:/downloads
+  sickrage:
+    container_name: sickrage
+    image: timhaak/sickrage
+    restart: always
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "8081:8081"
+    volumes:
+      - /media/sp0gg/BIGGUN/server_configs/sickrage:/config
+      - /media/sp0gg/BIGGUN/media/TV:/data
+      - /media/sp0gg/BIGGUN/media/Downloads:/downloads
+  couchpotato:
+    container_name: couchpotato
+    image: linuxserver/couchpotato
+    restart: always
+    environment:
+      - TZ=America/New_York
+      - PGID=1000
+      - PUID=1000
+    ports:
+      - "5050:5050"
+    volumes:
+      - /media/sp0gg/BIGGUN/server_configs/couchpotato:/config
+      - /media/sp0gg/BIGGUN/media/Downloads:/downloads
+      - /media/sp0gg/BIGGUN/media/Movies:/movies
