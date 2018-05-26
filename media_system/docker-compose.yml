@@ -27,29 +27,59 @@ services:
       - /media/sp0gg/BIGGUN/server_configs/qbittorrent:/config
       - /media/sp0gg/BIGGUN/media/Downloads:/torrents
       - /media/sp0gg/BIGGUN/media/Downloads:/downloads
-  sickrage:
-    container_name: sickrage
-    image: timhaak/sickrage
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
     restart: always
     environment:
-      - TZ=America/New_York
+     - TZ=America/New_York
+     - PGID=1000
+     - PUID=1000
     ports:
-      - "8081:8081"
+     - "8989:8989"
     volumes:
-      - /media/sp0gg/BIGGUN/server_configs/sickrage:/config
-      - /media/sp0gg/BIGGUN/media/TV:/data
+      - /media/sp0gg/BIGGUN/server_configs/sonarr:/config
       - /media/sp0gg/BIGGUN/media/Downloads:/downloads
-  couchpotato:
-    container_name: couchpotato
-    image: linuxserver/couchpotato
+      - /media/sp0gg/BIGGUN/media/TV:/tv
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr
     restart: always
     environment:
-      - TZ=America/New_York
-      - PGID=1000
-      - PUID=1000
+     - TZ=America/New_York
+     - PGID=1000
+     - PUID=1000
     ports:
-      - "5050:5050"
+     - "7878:7878"
     volumes:
-      - /media/sp0gg/BIGGUN/server_configs/couchpotato:/config
+      - /media/sp0gg/BIGGUN/server_configs/radarr:/config
       - /media/sp0gg/BIGGUN/media/Downloads:/downloads
       - /media/sp0gg/BIGGUN/media/Movies:/movies
+#  sickrage:
+#    container_name: sickrage
+#    image: timhaak/sickrage
+#    restart: always
+#    environment:
+#      - TZ=America/New_York
+#    ports:
+#      - "8081:8081"
+#    volumes:
+#      - /media/sp0gg/BIGGUN/server_configs/sickrage:/config
+#      - /media/sp0gg/BIGGUN/media/TV:/data
+#      - /media/sp0gg/BIGGUN/media/Downloads:/downloads
+#  couchpotato:
+#    container_name: couchpotato
+#    image: linuxserver/couchpotato
+#    restart: always
+#    environment:
+#      - TZ=America/New_York
+#      - PGID=1000
+#      - PUID=1000
+#    ports:
+#      - "5050:5050"
+#    volumes:
+#      - /media/sp0gg/BIGGUN/server_configs/couchpotato:/config
+#      - /media/sp0gg/BIGGUN/media/Downloads:/downloads
+#      - /media/sp0gg/BIGGUN/media/Movies:/movies
+
+
