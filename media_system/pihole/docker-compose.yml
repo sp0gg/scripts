@@ -10,8 +10,8 @@ services:
      - WEBPASSWORD=
     network_mode: host
     volumes:
-      - /media/sp0gg/BIGGUN/server_configs/pihole:/etc/pihole/
-      - /media/sp0gg/BIGGUN/server_configs/pihole/dnsmasq.d:/etc/dnsmasq.d/
+      - /media/sp0gg/BIGGUN MKII/server_configs/pihole:/etc/pihole/
+      - /media/sp0gg/BIGGUN MKII/server_configs/pihole/dnsmasq.d:/etc/dnsmasq.d/
     ports:
      - "53:53/tcp"
      - "53:53/udp"
