@@ -31,6 +31,35 @@ services:
       - /volume2/media/Downloads:/torrents
       - /volume2/media/Downloads:/downloads
       - /volume2/media/Downloads/blackhole:/blackhole
+#  nzbget:
+#    image: linuxserver/nzbget
+#    container_name: nzbget
+#    user: "1026"
+#    environment:
+#     - PUID=1026
+#     - PGID=100
+#     - TZ=America/New_York
+#    volumes:
+#     - /volume2/server_configs/nzbget:/config
+#     - /volume2/media/Downloads:/downloads
+#    ports:
+#     - "6789:6789"
+#    restart: always
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: sabnzbd
+    environment:
+     - PUID=1026
+     - PGID=100
+     - TZ=America/New_York
+    volumes:
+     - /volume2/server_configs/sabnzbd:/config
+     - /volume2/media/Downloads:/downloads
+     - /volume2/media/Downloads/temp:/incomplete-downloads #optional
+    ports:
+       - 8880:8080
+       - 9090:9090
+    restart: always
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr
@@ -66,7 +95,8 @@ services:
     image: mlabbe/iperf3
     restart: always
     ports:
-      - "5201:5201"
+      - "5201:5201/tcp"
+      - "5201:5201/udp"
 #  lidarr:
 #    container_name: lidarr
 #    image: linuxserver/lidarr

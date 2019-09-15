@@ -2,7 +2,8 @@ version: '2'
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:dev
+#    image: pihole/pihole:dev
+    image: pihole/pihole:works
 #    image: pihole/pihole
     restart: always
 #    user: "1026"
@@ -12,8 +13,13 @@ services:
      - WEBPASSWORD=
 #     - WEB_PORT=8888
      - DNSMASQ_LISTENING=localhost 
+     - DNS1=1.1.1.1
+     - DNS2=1.0.0.1
     network_mode: host
-    dns: 127.0.0.1
+    dns: 
+     - 127.0.0.1
+     - 1.1.1.1
+     - 1.0.0.1
     volumes:
       - /volume2/server_configs/pihole:/etc/pihole/
       - /volume2/server_configs/pihole/dnsmasq.d:/etc/dnsmasq.d/
@@ -22,3 +28,14 @@ services:
 #     - "53:53/tcp"
 #     - "53:53/udp"
 #     - "80:80"
+#  homeassistant:
+#    container_name: homeassistant
+#    image: homeassistant/home-assistant
+#    restart: always
+#    environment:
+#     - TZ=America/New_York
+#    volumes:
+#     - /volume2/server_configs/homeassistant:/config
+#    ports:
+#     - "8123:8123"
+#    network_mode: host
