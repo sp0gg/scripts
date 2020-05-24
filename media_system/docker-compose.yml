@@ -18,11 +18,15 @@ services:
       - /volume2/media/Music/:/data/music
   qbittorrent:
     container_name: qbittorrent
-    image: wernight/qbittorrent
+#    image: wernight/qbittorrent
+    image: linuxserver/qbittorrent
     restart: always
-    user: "1026"
+#    user: "1026"
     environment:
+      - WEBUI_PORT=8080
       - TZ=America/New_York
+      - PUID=1026
+      - PGID=100
     ports:
       - "8080:8080"
       - "6881:6881/tcp"
